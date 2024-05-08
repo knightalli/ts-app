@@ -1,5 +1,6 @@
 import './App.css'
 import CabinetPage from './pages/cabinet-page'
+import LoginPage from './pages/login-page'
 import MainPage from './pages/main-page'
 import RegisterPage from './pages/register-page'
 import UserPage from './pages/user-page'
@@ -15,6 +16,8 @@ function App() {
      <UserPage />
      <p>КОНЕЦ СТРАНИЦЫ</p>
      <RegisterPage />
+     <p>КОНЕЦ СТРАНИЦЫ</p>
+     <LoginPage />
     </>
   )
 }

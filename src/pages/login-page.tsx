@@ -1,15 +1,9 @@
-function RegisterPage() {
+function LoginPage() {
 
     return (
       <>
         <div>
           <form>
-            <label>Имя</label>
-            <input type="text" placeholder="Введите имя" required />
-
-            <label>Аватар</label>
-            <input type="text" placeholder="Вставьте ссылку на аватар" />
-
             <label>Email</label>
             <input type="text" placeholder="Введите email" required />
 
@@ -21,4 +15,4 @@ function RegisterPage() {
     )
   }
   
-  export default RegisterPage
+  export default LoginPage
