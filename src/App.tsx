@@ -29,6 +29,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
       <p> первая проверка</p>
+      <p> Вторая проверка</p>
     </>
   )
 }
