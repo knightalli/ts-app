@@ -1,0 +1,10 @@
+.filter-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.filter-name, .filter-id {
+    display: flex;
+    gap: 5px;
+}
