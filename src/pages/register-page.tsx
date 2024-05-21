@@ -11,7 +11,7 @@ function RegisterPage() {
             <input type="text" placeholder="Вставьте ссылку на аватар" />
 
             <label>Email</label>
-            <input type="text" placeholder="Введите email" required />
+            <input type="email" placeholder="Введите email" required />
 
             <label>Пароль</label>
             <input type="text" placeholder="Введите пароль" required />

@@ -1,7 +1,7 @@
-const IUser = {
-    id: 0,
-    name: '',
-    email: '',
-    avatar: '',
-    token: ''
+interface IUser {
+    id: number,
+    name: string,
+    email: string,
+    avatar: string,
+    token: string,
 }
