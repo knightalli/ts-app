@@ -1,6 +1,6 @@
 import '../styles/filter-elem.css'
 
-function FilterElem() {
+const FilterElem = () => {
 
     return (
       <>

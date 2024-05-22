@@ -1,6 +1,6 @@
 import '../styles/search-elem.css'
 
-function SearchElem() {
+const SearchElem = () => {
 
     return (
       <>

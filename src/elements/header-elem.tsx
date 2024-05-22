@@ -2,7 +2,7 @@
 import '../styles/header-page.css'
 import {NavLink} from "react-router-dom"; 
 
-function HeaderElem() {
+const HeaderElem = () => {
 
     return (
       <>
@@ -10,7 +10,7 @@ function HeaderElem() {
           <NavLink to={'/'}>
             <div className='header-logo'>Логотип</div>
           </NavLink>
-          <NavLink to={'/user'}>
+          <NavLink to={'/cabinet'}>
              <button className='header-cabinet-button'>Перейти в личный кабинет</button>
           </NavLink>
         </div>
