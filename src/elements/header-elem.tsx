@@ -1,16 +1,21 @@
 
-import '../styles/header-page.css' 
+import '../styles/header-page.css'
+import {NavLink} from "react-router-dom"; 
 
 function HeaderElem() {
 
     return (
       <>
         <div className='header-container'>
-          <div className='header-logo'>Логотип</div>
-          <button className='header-cabinet-button'>Перейти в личный кабинет</button>
+          <NavLink to={'/'}>
+            <div className='header-logo'>Логотип</div>
+          </NavLink>
+          <NavLink to={'/user'}>
+             <button className='header-cabinet-button'>Перейти в личный кабинет</button>
+          </NavLink>
         </div>
       </>
     )
-  }
-  
-  export default HeaderElem
+}
+
+export default HeaderElem

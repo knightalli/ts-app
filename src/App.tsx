@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import {RouterProvider, createBrowserRouter, Outlet} from 'react-router-dom'
 import './App.css'
 import HeaderElem from './elements/header-elem'
 import CabinetPage from './pages/cabinet-page'
@@ -10,7 +10,7 @@ import UserPage from './pages/user-page'
 const AppLayout = () => (
   <div className="App">
     <HeaderElem />
-    <MainPage />
+    <Outlet />
   </div>
 );
 
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
-        path: "/user/:id",
+        path: "/user",
         element: <UserPage />,
       },
       {
