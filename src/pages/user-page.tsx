@@ -4,7 +4,6 @@ function UserPage() {
       <>
       <div className="user-page-container">
         <div>Стрелка назад</div>
-        <div className="user-page-info">
           <div className="user-page-name">
             <p>Имя</p>
             <input type="text" placeholder="Введите своё имя" />
@@ -16,9 +15,7 @@ function UserPage() {
           <div className="user-page-avatar">
             <p>Фотография</p>
             <input type="text" placeholder="Вставьте ссылку на аватар" />
-          </div>          
-        </div>
-        <button className="button-edit">Отредактировать информацию</button>
+          </div>
       </div>
         
       </>
