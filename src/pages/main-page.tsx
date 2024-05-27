@@ -6,12 +6,17 @@ import UserElem from "../elements/user-elem.tsx";
 import {IPost} from "../interfaces/post.tsx";
 
 function MainPage() {
+    const initFilter = {
+        idParameter: 'all',
+        start: true,
+        letter: '',
+    }
+
     const [posts, setPosts] = useState<Array<IPost>>([]);
     const [filteredPosts, setFilteredPosts] = useState<Array<IPost>>([]);
     const [page, setPage] = useState(1);
-    const [filter, setFilter] = useState("");
+    const [filter, setFilter] = useState(initFilter);
     const [search, setSearch] = useState("");
-
 
     useEffect(() => {
         axios
@@ -24,9 +29,17 @@ function MainPage() {
     useEffect(() => {
         let updatedPosts = posts;
 
-        if (filter) {
+        if (filter.letter) {
             updatedPosts = updatedPosts.filter(post =>
-                post.first_name.toLowerCase().includes(filter.toLowerCase())
+                filter.start
+                    ? post.first_name.charAt(0).toLowerCase() === filter.letter.toLowerCase()
+                    : post.first_name.charAt(0).toLowerCase() !== filter.letter.toLowerCase()
+            );
+        }
+
+        if (filter.idParameter !== 'все') {
+            updatedPosts = updatedPosts.filter(post =>
+                filter.idParameter === 'чётные' ? post.id % 2 === 0 : post.id % 2 !== 0
             );
         }
 
