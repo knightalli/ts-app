@@ -1,11 +1,19 @@
 
 import '../styles/header-page.css'
 import {NavLink} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../store/store.ts";
+import {edit} from "../store/editorID.ts";
 
 const HeaderElem = () => {
     const isLogin:boolean = useSelector((state: RootState) => state.isLogin.value)
+    const dispatch = useDispatch();
+
+    function editUserId() {
+        const id = localStorage.getItem('id');
+        if (id)
+        dispatch(edit(JSON.parse(id)));
+    }
 
     return (
       <>
@@ -14,7 +22,7 @@ const HeaderElem = () => {
             <div className='header-logo'>Логотип</div>
           </NavLink>
             {isLogin &&
-                <NavLink to={'/cabinet'}>
+                <NavLink onClick={editUserId} to={'/cabinet'}>
                     <button className='header-cabinet-button'>Перейти в личный кабинет</button>
                 </NavLink>
             }
