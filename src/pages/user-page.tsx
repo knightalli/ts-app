@@ -9,11 +9,6 @@ const UserPage = () => {
 
   const id = useSelector((state: RootState) => state.editor.value)
 
-  function seeData() {
-    console.log(id);
-  }
-  seeData();
-
   const initUser = {
     id: 0,
     first_name: '',

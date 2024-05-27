@@ -1,8 +1,24 @@
 import '../styles/filter-elem.css'
+import {ReactElement} from "react";
 
-const FilterElem = () => {
+interface FilterElemProps {
+  onFilterChange: (filter: string) => void;
+}
 
-    return (
+const FilterElem = ({ onFilterChange }: FilterElemProps) => {
+
+    const alphabet = [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+    const alphabetList: ReactElement[] = [];
+
+  alphabet.forEach((letter, index) => {
+    alphabetList.push(<option key={index}>{letter}</option>);
+    });
+
+  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    onFilterChange(event.target.value);
+  };
+
+  return (
       <>
         <div className="filter-container">
           <div className='filter-id'>
@@ -11,7 +27,7 @@ const FilterElem = () => {
               <option>все</option>
               <option>чётные</option>
               <option>нечётные</option>
-            </select>            
+            </select>
           </div>
           <div className="filter-name">
             <span>Имя</span>
@@ -20,15 +36,13 @@ const FilterElem = () => {
               <option>не начинается</option>
             </select>
             <span>с буквы</span>
-            <select>
-              {/* тут будет цикл по алфавиту */}
-              <option>а</option>
-              <option>б</option>
+            <select onChange={handleFilterChange}>
+              {alphabetList}
             </select>
           </div>
         </div>
       </>
-    )
-  }
+  )
+}
   
   export default FilterElem

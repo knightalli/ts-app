@@ -7,7 +7,11 @@ import {IPost} from "../interfaces/post.tsx";
 
 function MainPage() {
     const [posts, setPosts] = useState<Array<IPost>>([]);
+    const [filteredPosts, setFilteredPosts] = useState<Array<IPost>>([]);
     const [page, setPage] = useState(1);
+    const [filter, setFilter] = useState("");
+    const [search, setSearch] = useState("");
+
 
     useEffect(() => {
         axios
@@ -16,6 +20,25 @@ function MainPage() {
             .then((data) => setPosts(data))
             .catch(() => setPosts([]));
     }, [page]);
+
+    useEffect(() => {
+        let updatedPosts = posts;
+
+        if (filter) {
+            updatedPosts = updatedPosts.filter(post =>
+                post.first_name.toLowerCase().includes(filter.toLowerCase())
+            );
+        }
+
+        if (search) {
+            updatedPosts = updatedPosts.filter(post =>
+                post.first_name.toLowerCase().includes(search.toLowerCase()) ||
+                post.email.toLowerCase().includes(search.toLowerCase())
+            );
+        }
+
+        setFilteredPosts(updatedPosts);
+    }, [posts, filter, search]);
 
     function increasePage(): void {
         setPage(2);
@@ -27,10 +50,10 @@ function MainPage() {
 
         return (
             <>
-                <SearchElem/>
-                <FilterElem/>
+                <SearchElem onSearchChange={setSearch}/>
+                <FilterElem onFilterChange={setFilter}/>
                 <div>
-                    {posts.map((post: IPost) => {
+                    {filteredPosts.map((post: IPost) => {
                         return (
                             <UserElem key={post.id}
                                       first_name={post.first_name}
