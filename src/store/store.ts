@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import editorID from "./editorID.ts";
+import editorIsLogin from "./editorIsLogin.ts";
 
 export const store = configureStore({
     reducer: {
-        editor: editorID
+        editor: editorID,
+        isLogin: editorIsLogin,
     },
 })
 

@@ -1,0 +1,16 @@
+.user-elem-container {
+    width: 250px;
+    height: 250px;
+    border: solid black 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+}
+
+.note, .note:hover, .note:visited, .non-decor{
+    text-decoration: none;
+    color: black;
+}

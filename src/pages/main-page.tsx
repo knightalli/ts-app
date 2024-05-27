@@ -4,10 +4,11 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import UserElem from "../elements/user-elem.tsx";
 import {IPost} from "../interfaces/post.tsx";
+import "../styles/main-page.css";
 
 function MainPage() {
     const initFilter = {
-        idParameter: 'all',
+        idParameter: 'все',
         start: true,
         letter: '',
     }
@@ -65,7 +66,7 @@ function MainPage() {
             <>
                 <SearchElem onSearchChange={setSearch}/>
                 <FilterElem onFilterChange={setFilter}/>
-                <div>
+                <div className="post-list">
                     {filteredPosts.map((post: IPost) => {
                         return (
                             <UserElem key={post.id}
@@ -76,8 +77,11 @@ function MainPage() {
                             ></UserElem>
                         )
                     })}
+                    {!filteredPosts.length &&
+                        <div>Нет подходящих постов</div>
+                    }
                 </div>
-                <div>
+                <div className="btn-page">
                     {
                         page === 1 &&
                         <button onClick={increasePage}>Следующая страница</button>

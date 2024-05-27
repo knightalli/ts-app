@@ -1,0 +1,25 @@
+.user-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    gap: 40px;
+}
+
+.user-info{
+    font-size: 45px;
+}
+
+.user-info-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-input {
+    padding: 10px;
+    width: 300px;
+}

@@ -3,7 +3,7 @@ function CabinetPage() {
     return (
       <>
         <div className="cabinet-container">
-        <div className="cabinet-info">
+        <div className="cabinet-edit">
           <div className="cabinet-name">
             <p>Имя</p>
             <input type="text" placeholder="Введите своё имя" />

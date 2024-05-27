@@ -2,6 +2,7 @@ import {IPost} from "../interfaces/post.tsx";
 import {NavLink} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {edit} from "../store/editorID.ts";
+import "../styles/user-elem.css";
 
 const UserElem = (props:IPost) => {
     const { avatar, first_name, email, id}  = props;
@@ -10,19 +11,18 @@ const UserElem = (props:IPost) => {
 
     return (
       <>
-          <NavLink onClick={() => dispatch(edit(id))} to={`/user/${id}`}>
+          <NavLink className="non-decor" onClick={() => dispatch(edit(id))} to={`/user/${id}`}>
               <div className="user-elem-container">
                   {
                       avatar &&
-                      <img alt={'Аватар'} src={avatar}/>
-
+                      <img alt={'Аватар'} src={avatar} width={150} height={150}/>
                   }
                   {
                       !avatar &&
-                      <img alt={'Аватар'} src={noAvatar}/>
+                      <img alt={'Аватар'} src={noAvatar} width={150} height={150}/>
                   }
-                  <p>{first_name}</p>
-                  <p>{email}</p>
+                  <p className="note">{first_name}</p>
+                  <p className="note">{email}</p>
               </div>
           </NavLink>
       </>
