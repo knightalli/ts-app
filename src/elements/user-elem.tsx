@@ -1,4 +1,4 @@
-import {IPost} from "../interfaces/post.tsx";
+import {IPost} from "../interfaces/post-interface.tsx";
 import {NavLink} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {edit} from "../store/editorID.ts";
@@ -8,7 +8,7 @@ const UserElem = (props:IPost) => {
     const { avatar, first_name, email, id}  = props;
     const noAvatar: string = 'https://cdn.icon-icons.com/icons2/2428/PNG/512/vk_black_logo_icon_147058.png';
     const dispatch = useDispatch();
-
+//NOTE, ЗАПРЕТИТЬ, ЕСЛИ ПОЛЬЗОВАТЕЛЬ НЕ ЗАРЕГИСТРИРОВАН
     return (
       <>
           <NavLink className="non-decor" onClick={() => dispatch(edit(id))} to={`/user/${id}`}>

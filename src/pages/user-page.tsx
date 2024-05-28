@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {IPost} from "../interfaces/post.tsx";
+import {IPost} from "../interfaces/post-interface.tsx";
 import axios from "axios";
 import {useSelector} from "react-redux";
 import {RootState} from "../store/store.ts";

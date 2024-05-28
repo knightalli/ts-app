@@ -5,8 +5,11 @@ export interface IsLoginState {
     value: boolean
 }
 
+const isLogin = localStorage.getItem('isLogin');
+const isLoginValue:boolean = isLogin ? JSON.parse(isLogin) : false;
+
 const initialState: IsLoginState = {
-    value: false,
+    value: isLoginValue,
 }
 
 export const editorIsLogin = createSlice({

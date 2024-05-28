@@ -1,13 +1,13 @@
 import {useSelector} from "react-redux";
 import {RootState} from "../store/store.ts";
 import {useEffect, useState} from "react";
-import {IPost} from "../interfaces/post.tsx";
+import {IPost} from "../interfaces/post-interface.tsx";
 import axios from "axios";
 import {NavLink} from "react-router-dom";
 
 const CabinetPage = () => {
     const noAvatar: string = 'https://cdn.icon-icons.com/icons2/2428/PNG/512/vk_black_logo_icon_147058.png';
-
+//NOTE, ПОМЕНЯТЬ ВСЁ НА ЛОКАЛСТОРЕДЖ
     const id = useSelector((state: RootState) => state.editor.value)
 
     const initUser = {
