@@ -1,8 +1,15 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {IUser} from "../interfaces/user-interface.tsx";
+import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {setIsLogin, setStoreToken} from "../store/editorIsLogin.ts";
 
 const RegisterPage = () => {
+
+    const dispatch = useDispatch();
+
+    const navigate = useNavigate();
 
     const [name, setName] = useState<string>('');
     const [avatar, setAvatar] = useState<string>('');
@@ -34,11 +41,19 @@ const RegisterPage = () => {
                 password,
                 avatar
             };
-            localStorage.setItem(`${token}`, JSON.stringify(localUserData));
+            localStorage.setItem(`${JSON.stringify(token)}`, JSON.stringify(localUserData));
         }
     }, [token, name, email, password, avatar]);
 
-
+    function checkToken(token: string) {
+        const findToken = localStorage.getItem(`${token}`);
+        const isRegister:boolean = findToken ? JSON.parse(findToken) : false;
+        if (isRegister) {
+            dispatch(setIsLogin(true));
+            dispatch(setStoreToken(token));
+            navigate('/');
+        }
+    }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -52,7 +67,9 @@ const RegisterPage = () => {
 
         axios.post(`https://reqres.in/api/register`, userData)
             .then(response => {
-                setToken(response.data);
+                setToken(response.data.token);
+                checkToken(token);
+                navigate('/');
             }).catch(error => console.log(error));
     };
 

@@ -1,8 +1,13 @@
 import axios from "axios";
 import {useState} from "react";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
+import {setIsLogin, setStoreToken} from "../store/editorIsLogin.ts";
+import {useDispatch} from "react-redux";
 
 const LoginPage = () => {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [token, setToken] = useState<string>('');
@@ -16,15 +21,7 @@ const LoginPage = () => {
         setPassword(e.target.value);
     };
 
-    function checkToken(token: string) {
-        const findToken = localStorage.getItem(`${token}`);
-        const isRegister:boolean = findToken ? JSON.parse(findToken) : false;
-        if (isRegister) {
-            //меняем isLogin
-            //переходим на другую страничку
-        }
-        //проверяем токен, если да, то на начальную, если нет, то на конец
-    }
+
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
