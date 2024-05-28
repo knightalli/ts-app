@@ -1,51 +1,37 @@
 import {useSelector} from "react-redux";
 import {RootState} from "../store/store.ts";
-import {useEffect, useState} from "react";
-import {IPost} from "../interfaces/post-interface.tsx";
-import axios from "axios";
-import {NavLink} from "react-router-dom";
+import { useState} from "react";
+import {NavLink, useNavigate} from "react-router-dom";
+import {IUser} from "../interfaces/user-interface.tsx";
+
 
 const CabinetPage = () => {
+    const navigate = useNavigate();
     const noAvatar: string = 'https://cdn.icon-icons.com/icons2/2428/PNG/512/vk_black_logo_icon_147058.png';
-//NOTE, ПОМЕНЯТЬ ВСЁ НА ЛОКАЛСТОРЕДЖ
-    const token = useSelector((state: RootState) => state.isLogin.token)
 
-    const initUser = {
-        id: 0,
-        first_name: '',
-        email: '',
-    }
+    const token = useSelector((state: RootState) => state.isLogin.token);
+    console.log('token' , token);
+    const localUser = localStorage.getItem(`"${token}"`);
+    console.log('local' , localUser);
+    const user: IUser = localUser ? JSON.parse(localUser) : null;
 
-    const [user, setUser] = useState<IPost>(initUser);
+
     const [isEdit, setIsEdit] = useState(false);
 
-    const initUpdateUser = {
-        first_name: user.first_name,
-        email: user.email,
-        avatar: user.avatar
-    }
-
-    const [updateUser, setUpdateUser] = useState<Partial<IPost>>(initUpdateUser);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [avatar, setAvatar] = useState('');
+    const [avatar, setAvatar] = useState(noAvatar);
 
     function updateUserData() {
-        setUpdateUser({
-            first_name: name,
-            email: email,
-            avatar: avatar
-        })
+        user.name = name;
+        user.avatar = avatar;
+        user.email = email;
+        localStorage.setItem(`${token}`, JSON.stringify(user));
+    }
 
-        console.log('start');
-
-        axios.patch(`https://reqres.in/api/users/${id}`, updateUser)
-            .then(response => {
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
+    function exitLogin() {
+        localStorage.removeItem(`"${token}"`);
+        navigate('/register');
     }
 
     return (
@@ -55,17 +41,17 @@ const CabinetPage = () => {
                     <button>Вернуться назад</button>
                 </NavLink>
                 {
-                    user.avatar &&
+                    user.avatar != null &&
                     <img width={350} height={350} alt={'Аватар'} src={user.avatar}/>
-
                 }
                 {
                     !user.avatar &&
                     <img width={350} height={350} alt={'Аватар'} src={noAvatar}/>
                 }
-                <p className="user-info">{user.first_name}</p>
+                <p className="user-info">{user.name}</p>
                 <p className="user-info">{user.email}</p>
                 <button onClick={() => setIsEdit(true)}>Изменить информацию</button>
+                <button onClick={() => exitLogin()}>Выйти</button>
             </div>
         }
             {isEdit &&

@@ -15,13 +15,10 @@ export const editorIdSlice = createSlice({
     reducers: {
         edit: (state, action: PayloadAction<number>) => {
             state.value = action.payload;
-        },
-        setToZero: (state) => {
-            state.value = 0;
-        },
+        }
     },
 })
 
-export const { edit, setToZero } = editorIdSlice.actions
+export const { edit } = editorIdSlice.actions
 
 export default editorIdSlice.reducer

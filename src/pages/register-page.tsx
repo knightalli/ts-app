@@ -1,5 +1,5 @@
 import axios from "axios";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {IUser} from "../interfaces/user-interface.tsx";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
@@ -14,7 +14,6 @@ const RegisterPage = () => {
     const [avatar, setAvatar] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [token, setToken] = useState<string>('');
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);
@@ -32,26 +31,17 @@ const RegisterPage = () => {
         setPassword(e.target.value);
     };
 
-    useEffect(() => {
-        if (token) {
-            const localUserData: IUser = {
-                name,
-                email,
-                password,
-                avatar
-            };
-            localStorage.setItem(`${JSON.stringify(token)}`, JSON.stringify(localUserData));
-        }
-    }, [token, name, email, password, avatar]);
-
     function checkToken(token: string) {
-        const findToken = localStorage.getItem(`${token}`);
-        const isRegister:boolean = findToken ? JSON.parse(findToken) : false;
-        if (isRegister) {
-            dispatch(setIsLogin(true));
-            dispatch(setStoreToken(token));
-            navigate('/');
-        }
+        dispatch(setIsLogin(true));
+        dispatch(setStoreToken(token));
+        const localUserData: IUser = {
+            name,
+            email,
+            password,
+            avatar
+        };
+        localStorage.setItem(`${JSON.stringify(token)}`, JSON.stringify(localUserData));
+        navigate('/');
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -62,12 +52,9 @@ const RegisterPage = () => {
             password
         };
 
-        console.log(userData);
-
         axios.post(`https://reqres.in/api/register`, userData)
             .then(response => {
-                setToken(response.data.token);
-                checkToken(token);
+                checkToken(response.data.token);
                 navigate('/');
             }).catch(error => console.log(error));
     };

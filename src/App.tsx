@@ -1,4 +1,4 @@
-import {RouterProvider, createBrowserRouter, Outlet} from 'react-router-dom'
+import {RouterProvider, createBrowserRouter, Outlet, Navigate} from 'react-router-dom'
 import './App.css'
 import HeaderElem from './elements/header-elem'
 import CabinetPage from './pages/cabinet-page'
@@ -13,13 +13,15 @@ const AppLayout = () => (
   </div>
 );
 
+const isAuthenticated:boolean = localStorage.getItem('"QpwL5tke4Pnpja7X4"') != null;
+
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
     children: [
       {
         path: "/",
-        element: <MainPage />,
+        element: isAuthenticated ? <MainPage /> : <Navigate to="/register" />,
       },
       {
         path: "/register",
@@ -27,12 +29,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/user/:id",
-        element: <UserPage />,
+        element: isAuthenticated ? <UserPage /> : <Navigate to="/register" />,
       },
       {
         path: "/cabinet",
-        element: <CabinetPage />
-      }   
+        element: isAuthenticated ? <CabinetPage /> : <Navigate to="/register" />
+      }
     ],
   }
 ]);
