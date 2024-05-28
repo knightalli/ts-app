@@ -1,20 +1,18 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../store/store.ts";
 import { useState} from "react";
 import {NavLink, useNavigate} from "react-router-dom";
 import {IUser} from "../interfaces/user-interface.tsx";
+import {editUser} from "../store/editorUser.ts";
 
 
 const CabinetPage = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const noAvatar: string = 'https://cdn.icon-icons.com/icons2/2428/PNG/512/vk_black_logo_icon_147058.png';
 
+    const user:IUser = useSelector((state: RootState) => state.user.value);
     const token = useSelector((state: RootState) => state.isLogin.token);
-    console.log('token' , token);
-    const localUser = localStorage.getItem(`"${token}"`);
-    console.log('local' , localUser);
-    const user: IUser = localUser ? JSON.parse(localUser) : null;
-
 
     const [isEdit, setIsEdit] = useState(false);
 
@@ -23,10 +21,13 @@ const CabinetPage = () => {
     const [avatar, setAvatar] = useState(noAvatar);
 
     function updateUserData() {
-        user.name = name;
-        user.avatar = avatar;
-        user.email = email;
-        localStorage.setItem(`${token}`, JSON.stringify(user));
+        const updateUser: IUser = {...user};
+        updateUser.name = name;
+        updateUser.avatar = avatar;
+        updateUser.email = email;
+        localStorage.setItem(`${token}`, JSON.stringify(updateUser));
+        dispatch(editUser(updateUser));
+        setIsEdit(false);
     }
 
     function exitLogin() {
@@ -41,7 +42,7 @@ const CabinetPage = () => {
                     <button>Вернуться назад</button>
                 </NavLink>
                 {
-                    user.avatar != null &&
+                    user.avatar &&
                     <img width={350} height={350} alt={'Аватар'} src={user.avatar}/>
                 }
                 {

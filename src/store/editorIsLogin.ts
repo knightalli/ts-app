@@ -6,8 +6,8 @@ export interface IsLoginState {
     token: string,
 }
 
-const isLogin = localStorage.getItem('isLogin');
-const isLoginValue:boolean = isLogin ? JSON.parse(isLogin) : false;
+const isLogin = localStorage.getItem('"QpwL5tke4Pnpja7X4"');
+const isLoginValue:boolean = isLogin ? true : false;
 
 const initialState: IsLoginState = {
     value: isLoginValue,

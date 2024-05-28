@@ -6,12 +6,11 @@ export interface UserState {
     value: IUser
 }
 
+const user = localStorage.getItem('"QpwL5tke4Pnpja7X4"');
+const loginUser:IUser = user ? JSON.parse(user) : false;
+
 const initialState: UserState = {
-    value: {
-        name: '',
-        email: '',
-        password: '',
-    },
+    value: loginUser,
 }
 
 export const editorUserSlice = createSlice({

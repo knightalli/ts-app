@@ -4,6 +4,8 @@ import {IUser} from "../interfaces/user-interface.tsx";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {setIsLogin, setStoreToken} from "../store/editorIsLogin.ts";
+import {editUser} from "../store/editorUser.ts";
+import "../styles/register-page.css"
 
 const RegisterPage = () => {
 
@@ -40,6 +42,7 @@ const RegisterPage = () => {
             password,
             avatar
         };
+        dispatch(editUser(localUserData));
         localStorage.setItem(`${JSON.stringify(token)}`, JSON.stringify(localUserData));
         navigate('/');
     }
@@ -61,9 +64,10 @@ const RegisterPage = () => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='info-input'>
                 <label>Имя</label>
                 <input
+                    className="user-input"
                     type="text"
                     placeholder="Введите имя"
                     value={name}
@@ -73,6 +77,7 @@ const RegisterPage = () => {
 
                 <label>Аватар</label>
                 <input
+                    className="user-input"
                     type="text"
                     placeholder="Вставьте ссылку на аватар"
                     value={avatar}
@@ -81,6 +86,7 @@ const RegisterPage = () => {
 
                 <label>Email</label>
                 <input
+                    className="user-input"
                     type="email"
                     placeholder="Введите email"
                     value={email}
@@ -90,6 +96,7 @@ const RegisterPage = () => {
 
                 <label>Пароль</label>
                 <input
+                    className="user-input"
                     type="password"
                     placeholder="Введите пароль"
                     value={password}

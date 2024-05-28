@@ -54,6 +54,7 @@ const UserPage = () => {
         .catch(error => {
           console.error(error);
         });
+    setIsEdit(false);
   }
 
     return (
