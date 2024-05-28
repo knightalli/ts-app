@@ -8,7 +8,7 @@ import {NavLink} from "react-router-dom";
 const CabinetPage = () => {
     const noAvatar: string = 'https://cdn.icon-icons.com/icons2/2428/PNG/512/vk_black_logo_icon_147058.png';
 //NOTE, ПОМЕНЯТЬ ВСЁ НА ЛОКАЛСТОРЕДЖ
-    const id = useSelector((state: RootState) => state.editor.value)
+    const token = useSelector((state: RootState) => state.isLogin.token)
 
     const initUser = {
         id: 0,
@@ -29,13 +29,6 @@ const CabinetPage = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [avatar, setAvatar] = useState('');
-
-    useEffect(() => {
-        axios
-            .get(`https://reqres.in/api/users/${id}`)
-            .then((res) => res.data.data)
-            .then((data) => setUser(data));
-    }, [id]);
 
     function updateUserData() {
         setUpdateUser({

@@ -2,7 +2,6 @@ import {RouterProvider, createBrowserRouter, Outlet} from 'react-router-dom'
 import './App.css'
 import HeaderElem from './elements/header-elem'
 import CabinetPage from './pages/cabinet-page'
-import LoginPage from './pages/login-page'
 import MainPage from './pages/main-page'
 import RegisterPage from './pages/register-page'
 import UserPage from './pages/user-page'
@@ -25,10 +24,6 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <RegisterPage />,
-      },
-      {
-        path: "/login",
-        element: <LoginPage />,
       },
       {
         path: "/user/:id",

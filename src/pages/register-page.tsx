@@ -8,7 +8,6 @@ import {setIsLogin, setStoreToken} from "../store/editorIsLogin.ts";
 const RegisterPage = () => {
 
     const dispatch = useDispatch();
-
     const navigate = useNavigate();
 
     const [name, setName] = useState<string>('');
